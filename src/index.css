@@ -1,0 +1,221 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   IVGuard — design tokens
+   Calm, high-contrast, hospital-appropriate light theme.
+   Palette (per brief):
+     Primary medical blue #2C5EAD · Secondary blue #1591DC
+     Teal (normal + live) #4BB8AF · Cyan accent #00B7CD
+     Critical #DF301C · Warning #FF9100 · Pale warning #FFF1D1
+     Canvas #F4F8FC · Card #FFFFFF · Text #18324A
+     Secondary text #5E7185 · Borders #DCE6EF
+   ========================================================================== */
+@theme {
+  --font-sans:
+    'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', 'Cascadia Mono', Consolas, monospace;
+
+  /* Brand / primary blue — structure, headers */
+  --color-brand-50: #f2f6fc;
+  --color-brand-100: #e1ebf8;
+  --color-brand-200: #c3d7ef;
+  --color-brand-300: #92b4df;
+  --color-brand-400: #4b85cb;
+  --color-brand-500: #2c5ead;
+  --color-brand-600: #234c8c;
+  --color-brand-700: #1b3b6e;
+  --color-brand-800: #13294d;
+  --color-brand-900: #0d1c36;
+
+  /* Bright blue — secondary accents, live values */
+  --color-bright-300: #7cc6ef;
+  --color-bright-400: #3aa9e6;
+  --color-bright-500: #1591dc;
+  --color-bright-600: #0e76b4;
+
+  /* Cyan — sensor / telemetry accents */
+  --color-cyan-accent-300: #5fd7e6;
+  --color-cyan-accent-400: #22c7dc;
+  --color-cyan-accent-500: #00b7cd;
+  --color-cyan-accent-600: #0092a6;
+
+  /* Teal — normal operating status and live data */
+  --color-teal-soft-300: #8ed6d0;
+  --color-teal-soft-400: #4bb8af;
+  --color-teal-soft-500: #359b93;
+  --color-teal-soft-600: #217e77;
+  --color-teal-soft-700: #175f5a;
+
+  /* Safe / normal ramp (teal) — keeps existing `safe-*` utility names */
+  --color-safe-50: #ecf8f7;
+  --color-safe-100: #d5f0ed;
+  --color-safe-200: #a9e1dc;
+  --color-safe-300: #7ed0c9;
+  --color-safe-500: #4bb8af;
+  --color-safe-600: #359b93;
+  --color-safe-700: #217e77;
+  --color-safe-800: #175f5a;
+
+  /* Warning — amber */
+  --color-warn-50: #fff8ec;
+  --color-warn-100: #fff1d1;
+  --color-warn-200: #ffd79a;
+  --color-warn-300: #ffc266;
+  --color-warn-500: #ff9100;
+  --color-warn-600: #dd7a00;
+  --color-warn-700: #b45309;
+  --color-warn-800: #8a3f07;
+
+  /* Critical — red (reserved for danger only) */
+  --color-crit-50: #fef1ef;
+  --color-crit-100: #fbd9d4;
+  --color-crit-200: #f5b3aa;
+  --color-crit-300: #ef8b7d;
+  --color-crit-500: #df301c;
+  --color-crit-600: #c22714;
+  --color-crit-700: #a31e10;
+  --color-crit-800: #7f170c;
+
+  /* Pale warning surface from the brief */
+  --color-cream: #fff1d1;
+  --color-cream-soft: #fffaef;
+
+  /* Neutrals / ink — canvas, cards, text, borders */
+  --color-ink-50: #f4f8fc; /* canvas */
+  --color-ink-100: #edf3f9;
+  --color-ink-150: #e5eef6;
+  --color-ink-200: #dce6ef; /* borders */
+  --color-ink-300: #c2d2e2;
+  --color-ink-400: #7388a0;
+  --color-ink-500: #5e7185; /* secondary text */
+  --color-ink-600: #4b5f75;
+  --color-ink-700: #33475e;
+  --color-ink-800: #18324a; /* primary text */
+  --color-ink-900: #102338;
+
+  /* Motion — deliberately subtle */
+  --animate-pulse-live: pulse-live 2.6s ease-in-out infinite;
+  --animate-attention: attention 2.4s ease-in-out infinite;
+  --animate-rise: rise 0.35s ease-out both;
+
+  @keyframes pulse-live {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(0.82);
+    }
+  }
+
+  @keyframes attention {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgb(223 48 28 / 0%);
+    }
+    50% {
+      box-shadow: 0 0 0 7px rgb(223 48 28 / 0.1);
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ink-50 text-ink-800 font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Numbers in telemetry must never jitter as digits change. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-bright-500;
+  }
+
+  ::selection {
+    @apply bg-brand-200 text-brand-900;
+  }
+}
+
+@layer components {
+  /* Card shell shared by every panel on the dashboard */
+  .panel {
+    @apply rounded-xl border border-ink-200 bg-white shadow-[0_1px_2px_rgb(14_23_38/0.04),0_10px_28px_-18px_rgb(14_23_38/0.22)];
+  }
+
+  .panel-header {
+    @apply flex items-center justify-between gap-3 border-b border-ink-100 px-5 py-3.5;
+  }
+
+  .eyebrow {
+    @apply text-ink-500 text-[12px] font-semibold tracking-[0.12em] uppercase;
+  }
+}
+
+@layer utilities {
+  /* Screen-reader-only text for accessible labels */
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* The dashboard is rendered at a fixed logical size and scaled to fit inside
+   the viewport (see ScaledStage), so the document itself must never scroll and
+   the black letterbox frame fills the rest of the screen. */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+}
+
+/* Respect reduced-motion: keep information, drop movement. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Recharts chrome overrides — keep plots feeling like part of the device UI */
+.recharts-surface {
+  overflow: visible;
+}
+.recharts-cartesian-axis-tick-value {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.recharts-tooltip-wrapper {
+  outline: none;
+}

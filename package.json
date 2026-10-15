@@ -1,0 +1,37 @@
+{
+  "name": "ivguard-dashboard",
+  "private": true,
+  "version": "0.2.0",
+  "description": "IVGuard — live, single-screen patient-side IV tubing safety monitor (academic prototype)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "mock:esp32": "node scripts/mock-esp32.mjs",
+    "qa:smoke": "node scripts/qa-smoke.mjs",
+    "qa:layout": "node scripts/qa-layout.mjs",
+    "qa:states": "node scripts/qa-states.mjs",
+    "qa:shots": "node scripts/qa-shots.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "lucide-react": "^1.51.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "recharts": "^3.10.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "oxlint": "^1.81.0",
+    "puppeteer-core": "^25.12.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0"
+  }
+}
