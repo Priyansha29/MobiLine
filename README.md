@@ -1,11 +1,11 @@
-# MAITAS — Motion-Aware IV Tubing Alert System
+# IVSafe — Motion-Aware IV Tubing Alert System
 
 <p align="center">
   <strong>An ESP32-Based Sensor Interfacing and Real-Time IV Tubing Monitoring Prototype</strong>
 </p>
 
 <p align="center">
-  <img src="pictures/project2.jpeg" alt="MAITAS hardware prototype and demonstration setup" width="80%">
+  <img src="pictures/project2.jpeg" alt="IVSafe hardware prototype and demonstration setup" width="80%">
 </p>
 
 <p align="center">
@@ -47,17 +47,17 @@
 
 ## Overview
 
-**MAITAS (Motion-Aware IV Tubing Alert System)** is an academic engineering prototype designed to demonstrate how embedded systems and sensor interfacing can help monitor disturbances around an intravenous (IV) tubing setup.
+**IVSafe (Motion-Aware IV Tubing Alert System)** is an academic engineering prototype designed to demonstrate how embedded systems and sensor interfacing can help monitor disturbances around an intravenous (IV) tubing setup.
 
 During patient movement or bed repositioning, IV tubing may experience pulling, displacement, or changes in its physical arrangement. Such disturbances can be difficult to observe continuously, particularly when healthcare personnel are monitoring multiple patients.
 
-MAITAS explores a technology-assisted approach: sensors collect physical measurements, an ESP32 processes the readings, and a Wi-Fi-connected dashboard presents the information in an accessible format. Configurable rules classify selected readings into prototype status levels, helping demonstrate how a monitoring system could draw attention to conditions that warrant human inspection.
+IVSafe explores a technology-assisted approach: sensors collect physical measurements, an ESP32 processes the readings, and a Wi-Fi-connected dashboard presents the information in an accessible format. Configurable rules classify selected readings into prototype status levels, helping demonstrate how a monitoring system could draw attention to conditions that warrant human inspection.
 
 The project brings together **microcontrollers, sensor interfacing, embedded programming, wireless communication, data processing, and a real-time visual interface** in one integrated prototype.
 
 > **Our central idea:** Convert physical changes around IV tubing into measurable signals, then communicate those signals clearly enough to support timely human attention.
 
-**Important:** MAITAS is a student prototype, not a certified medical device. Its readings and thresholds have not been clinically validated and must not be used to make diagnosis or treatment decisions.
+**Important:** IVSafe is a student prototype, not a certified medical device. Its readings and thresholds have not been clinically validated and must not be used to make diagnosis or treatment decisions.
 
 ## The Problem We Aim to Address
 
@@ -70,13 +70,13 @@ Potential challenges include:
 - **Changes in drop activity:** A change in the observed drip count may indicate that the infusion setup needs checking, although the count alone cannot establish the cause.
 - **Limited continuous visibility:** Staff may not be able to observe every physical change in a line at every moment.
 
-A conventional setup does not necessarily provide an electronic view of these physical changes. MAITAS investigates whether multiple inexpensive sensors and a microcontroller can make selected changes measurable and visible.
+A conventional setup does not necessarily provide an electronic view of these physical changes. IVSafe investigates whether multiple inexpensive sensors and a microcontroller can make selected changes measurable and visible.
 
 The objective is not to replace nursing observation or clinical equipment. It is to demonstrate an embedded monitoring concept that combines several signals into one interface.
 
 ## Our Approach
 
-MAITAS uses an ESP32 as the central controller for a set of sensors connected to a prototype IV-line monitoring arrangement.
+IVSafe uses an ESP32 as the central controller for a set of sensors connected to a prototype IV-line monitoring arrangement.
 
 The system collects measurements associated with tubing tension, sensor-to-target distance, drop activity, and structural movement or tilt. It then makes the readings available to a browser-based dashboard over Wi-Fi.
 
@@ -102,7 +102,7 @@ The project therefore has two closely connected parts:
 ## System Architecture
 
 <p align="center">
-  <img src="pictures/circuit.jpeg" alt="MAITAS ESP32 and sensor interfacing circuit" width="85%">
+  <img src="pictures/circuit.jpeg" alt="IVSafe ESP32 and sensor interfacing circuit" width="85%">
 </p>
 
 The system follows a sensor-to-dashboard data pipeline.
@@ -155,7 +155,7 @@ The system follows a sensor-to-dashboard data pipeline.
 
 ## Hardware Components
 
-| Component | Purpose in MAITAS |
+| Component | Purpose in IVSafe |
 |---|---|
 | ESP32 development board | Main microcontroller, sensor coordination, embedded processing, Wi-Fi connectivity, and HTTP server |
 | Load cell | Converts applied mechanical force into a small electrical signal |
@@ -224,7 +224,7 @@ The HC-SR04 operates at a 5 V supply in typical modules, while the ESP32 uses 3.
 
 ### 3. MPU6500 — Movement and Tilt Sensing
 
-The MPU6500 is an inertial measurement sensor that includes a three-axis accelerometer and a three-axis gyroscope. MAITAS uses accelerometer measurements to demonstrate motion and orientation monitoring.
+The MPU6500 is an inertial measurement sensor that includes a three-axis accelerometer and a three-axis gyroscope. IVSafe uses accelerometer measurements to demonstrate motion and orientation monitoring.
 
 The sensor communicates with the ESP32 over the I²C bus.
 
@@ -312,7 +312,7 @@ The microcontroller is therefore both the hardware interface and the network-con
 
 ## Wireless Data Transmission
 
-One of the central features of MAITAS is the transfer of sensor readings directly from the ESP32 to the dashboard.
+One of the central features of IVSafe is the transfer of sensor readings directly from the ESP32 to the dashboard.
 
 The system uses a lightweight HTTP request-response approach rather than requiring a separate cloud server for the basic local demonstration.
 
@@ -404,7 +404,7 @@ The server should also handle any required `OPTIONS` preflight request. CORS is 
 
 A monitoring interface should not mistake an old reading for a current one.
 
-MAITAS includes connection and stale-data handling:
+IVSafe includes connection and stale-data handling:
 
 - **Live:** A recent valid response has been received.
 - **Data stale:** The endpoint has stopped returning recent valid samples.
@@ -417,10 +417,10 @@ This distinction is important because a frozen display must not look like a func
 
 ## Dashboard and Real-Time Monitoring
 
-The MAITAS dashboard is designed to make the sensor readings understandable without requiring the viewer to inspect the serial output or interpret raw electrical signals.
+The IVSafe dashboard is designed to make the sensor readings understandable without requiring the viewer to inspect the serial output or interpret raw electrical signals.
 
 <p align="center">
-  <img src="pictures/ICU_normal.jpeg" alt="MAITAS dashboard displaying normal prototype readings" width="100%">
+  <img src="pictures/ICU_normal.jpeg" alt="IVSafe dashboard displaying normal prototype readings" width="100%">
 </p>
 
 <p align="center">
@@ -452,7 +452,7 @@ The dashboard also distinguishes sensor readings from interpretations. For examp
 ### Critical-state example
 
 <p align="center">
-  <img src="pictures/ICU_critical.jpeg" alt="MAITAS dashboard displaying a critical prototype state" width="100%">
+  <img src="pictures/ICU_critical.jpeg" alt="IVSafe dashboard displaying a critical prototype state" width="100%">
 </p>
 
 <p align="center">
@@ -474,7 +474,7 @@ The patient detail concept demonstrates how an alert can be associated with a pa
 ### Alert notification concept
 
 <p align="center">
-  <img src="pictures/notif.png" alt="MAITAS alert notification interface" width="85%">
+  <img src="pictures/notif.png" alt="IVSafe alert notification interface" width="85%">
 </p>
 
 The notification interface explores how an elevated prototype status might be brought to a caregiver's attention. The actions and escalation shown in a UI mock-up do not imply that a real hospital alerting or escalation service is deployed.
@@ -482,7 +482,7 @@ The notification interface explores how an elevated prototype status might be br
 ## Prototype Demonstration
 
 <p align="center">
-  <img src="pictures/project1.jpeg" alt="MAITAS physical hardware prototype" width="85%">
+  <img src="pictures/project1.jpeg" alt="IVSafe physical hardware prototype" width="85%">
 </p>
 
 <p align="center">
@@ -669,13 +669,13 @@ These extensions would help move the project from a proof-of-concept demonstrati
 
 ## Conclusion
 
-MAITAS began with a simple concern: physical changes around IV tubing can be difficult to observe continuously, and making those changes measurable may help people understand when closer inspection is warranted.
+IVSafe began with a simple concern: physical changes around IV tubing can be difficult to observe continuously, and making those changes measurable may help people understand when closer inspection is warranted.
 
 By combining sensor interfacing, ESP32-based embedded processing, wireless HTTP communication, and a real-time dashboard, the project demonstrates how physical signals can travel from a prototype setup to a clear digital representation.
 
 Its value lies not only in the individual sensors or the dashboard, but in the integration of the complete system: **measure, process, communicate, visualize, and indicate when a configured condition deserves attention.**
 
-MAITAS is an exploration of how embedded engineering can be applied thoughtfully to a healthcare-related problem. It is a starting point for further calibration, testing, and validation—not a replacement for clinical judgement or established medical equipment.
+IVSafe is an exploration of how embedded engineering can be applied thoughtfully to a healthcare-related problem. It is a starting point for further calibration, testing, and validation—not a replacement for clinical judgement or established medical equipment.
 
 ---
 
@@ -689,7 +689,7 @@ Developed collaboratively by:
 - **Priyansha**
 
 <p align="center">
-  <strong>MAITAS — Motion-Aware IV Tubing Alert System</strong><br>
+  <strong>IVSafe — Motion-Aware IV Tubing Alert System</strong><br>
   <em>Connecting embedded sensing with meaningful, human-readable monitoring.</em>
 </p>
 
