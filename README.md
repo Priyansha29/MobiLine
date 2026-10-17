@@ -107,49 +107,47 @@ The project therefore has two closely connected parts:
 
 The system follows a sensor-to-dashboard data pipeline.
 
-```text
-       PHYSICAL IV-LINE SETUP
-                  |
-                  v
-       +----------------------+
-       |    Sensor Layer      |
-       |                      |
-       | Load Cell + HX711    |
-       | HC-SR04              |
-       | MPU6500               |
-       | IR Drip Sensor       |
-       +----------------------+
-                  |
-                  v
-       +----------------------+
-       |        ESP32         |
-       |                      |
-       | Sensor Acquisition   |
-       | Embedded Processing  |
-       | Threshold Evaluation |
-       | Wi-Fi Connectivity   |
-       | HTTP Web Server      |
-       +----------------------+
-                  |
-           Wi-Fi / HTTP
-                  |
-                  v
-       +----------------------+
-       |   GET /data Endpoint |
-       |      JSON Payload    |
-       +----------------------+
-                  |
-                  v
-       +----------------------+
-       |   Browser Dashboard  |
-       |                      |
-       | Live Measurements    |
-       | Status Classification|
-       | Trend Charts         |
-       | Recent Events        |
-       | Connection Health     |
-       +----------------------+
-```
+```mermaid
+flowchart TD
+    A["PHYSICAL IV-LINE SETUP"] --> B
+
+    subgraph S["Sensor Layer"]
+        B["Load Cell + HX711<br/>HC-SR04<br/>MPU6500<br/>IR Drip Sensor"]
+    end
+
+    B --> C
+
+    subgraph E["ESP32"]
+        C["Sensor Acquisition<br/>Embedded Processing<br/>Threshold Evaluation<br/>Wi-Fi Connectivity<br/>HTTP Web Server"]
+    end
+
+    C -->|Wi-Fi / HTTP| D
+
+    subgraph API["Data Endpoint"]
+        D["GET /data Endpoint<br/>JSON Payload"]
+    end
+
+    D --> F
+
+    subgraph UI["Browser Dashboard"]
+        F["Live Measurements<br/>Status Classification<br/>Trend Charts<br/>Recent Events<br/>Connection Health"]
+    end
+
+    classDef default fill:#FFF9C4,stroke:#D4A72C,color:#333333,stroke-width:2px;
+    classDef hardware fill:#FFF3B0,stroke:#C99A00,color:#333333,stroke-width:2px;
+    classDef dashboard fill:#FFF8D6,stroke:#D4A72C,color:#333333,stroke-width:2px;
+
+    class A,B hardware;
+    class C,D default;
+    class F dashboard;
+
+    style S fill:#FFFDE7,stroke:#D4A72C,stroke-width:2px,color:#333333
+    style E fill:#FFFDE7,stroke:#D4A72C,stroke-width:2px,color:#333333
+    style API fill:#FFFDE7,stroke:#D4A72C,stroke-width:2px,color:#333333
+    style UI fill:#FFFDE7,stroke:#D4A72C,stroke-width:2px,color:#333333
+
+    linkStyle default stroke:#B38B22,stroke-width:2px
+'''
 
 **Key design principle:** The ESP32 is responsible for interfacing with the physical sensors and serving the measurements. The browser dashboard is responsible for presenting the data and applying additional display-level advisories. This separation keeps hardware acquisition distinct from the user interface.
 
