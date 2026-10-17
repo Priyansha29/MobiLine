@@ -108,6 +108,7 @@ The project therefore has two closely connected parts:
 The system follows a sensor-to-dashboard data pipeline.
 
 ```mermaid
+   
 flowchart TD
     A["PHYSICAL IV-LINE SETUP"] --> B
 
@@ -147,8 +148,8 @@ flowchart TD
     style UI fill:#FFFDE7,stroke:#D4A72C,stroke-width:2px,color:#333333
 
     linkStyle default stroke:#B38B22,stroke-width:2px
-'''
 
+```
 **Key design principle:** The ESP32 is responsible for interfacing with the physical sensors and serving the measurements. The browser dashboard is responsible for presenting the data and applying additional display-level advisories. This separation keeps hardware acquisition distinct from the user interface.
 
 ## Hardware Components
